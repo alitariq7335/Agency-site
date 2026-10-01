@@ -1,6 +1,8 @@
-import type { NextConfig } from "next";
+// Plain JavaScript config (no TypeScript transpile step) so it loads on hosts
+// where Next.js falls back to WebAssembly SWC, e.g. Hostinger's older glibc.
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"] },
