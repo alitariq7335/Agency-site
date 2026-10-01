@@ -37,6 +37,16 @@ Also swap the placeholder logo in `src/components/layout/Logo.tsx` and `src/app/
 
 3 steps, validated with one zod schema on client and server (`src/lib/contactSchema.ts`). The Server Action (`src/app/contact/actions.ts`) checks a honeypot, rate-limits per IP, verifies Turnstile (if keys are set), stores the brief in Vercel Blob (if configured), and sends a notification + auto-reply through Resend using React Email templates (`src/emails`). Without `RESEND_API_KEY` leads are logged to the console.
 
+## Deploy on Hostinger (Node.js hosting)
+
+Hostinger's build servers use an older Linux (glibc < 2.29), so Next.js can't load its native compiler there and falls back to the WebAssembly one. The project is set up for that:
+
+- `npm run build` runs `next build --webpack` (Turbopack needs the native compiler).
+- `@next/swc-wasm-nodejs` is a dependency, so nothing is downloaded at build time.
+- The config is `next.config.mjs` (plain JS), not `.ts`.
+
+In hPanel: Node.js **20 or 22**, build command `npm run build`, start command `npm start`, and add the environment variables from `.env.example`. Builds are slower than on Vercel (WebAssembly), which is expected.
+
 ## Deploy (Vercel)
 
 1. Push to GitHub and import the repo in Vercel.
