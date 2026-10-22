@@ -10,6 +10,21 @@ const nextConfig = {
     optimizePackageImports: ["lucide-react", "@react-three/drei", "motion"],
     serverActions: { bodySizeLimit: "12mb" }, // allows a 10 MB brief upload
   },
+  // Service URLs from the first version of the site → their closest new page (permanent).
+  async redirects() {
+    const moved = {
+      "web-design-development": "website-development",
+      seo: "local-seo",
+      "google-ads-ppc": "digital-marketing",
+      "social-media-marketing": "social-media-management",
+      "content-generation": "content-creation",
+      "branding-graphic-design": "content-creation",
+      "email-marketing": "digital-marketing",
+      "ecommerce-solutions": "ecommerce-stores",
+      "website-maintenance-support": "wordpress-development",
+    };
+    return Object.entries(moved).map(([from, to]) => ({ source: `/services/${from}`, destination: `/services/${to}`, permanent: true }));
+  },
   async headers() {
     return [
       {

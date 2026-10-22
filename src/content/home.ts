@@ -2,91 +2,112 @@ import { site } from "./site";
 
 export const home = {
   meta: {
-    title: `${site.name} — Digital Marketing Agency in ${site.city} | Web, SEO & Ads`,
-    description: `${site.name} builds high-converting websites and runs SEO, Google Ads and social campaigns that grow revenue. Get a free audit today.`,
+    title: `${site.name} — Software, AI & Digital Marketing Agency in Pakistan`,
+    description:
+      "Bengan Studios builds websites, apps and online stores, automates work with AI chatbots and workflows, and grows businesses with Local SEO, Google Business Profile and Meta ads.",
   },
   hero: {
-    eyebrow: `Digital marketing agency · ${site.city}`,
-    headlineLead: "We build brands people",
-    rotating: ["remember", "find", "buy from", "talk about"],
+    eyebrow: "Digital agency · Pakistan & worldwide",
+    tagline: ["Plant the idea.", "We'll grow it."],
     subhead:
-      "Websites that convert, SEO that ranks, and campaigns that pay for themselves. Ten services, one team, measured by your growth.",
-    primaryCta: { label: "Start a project", href: "/contact" },
-    secondaryCta: { label: "See our work", href: "#work" },
+      "Bengan Studios is the one team a business can call for the whole digital side: we build it, automate it, market it and keep it running.",
+    primaryCta: { label: "Plant your idea", href: "/contact" },
+    secondaryCta: { label: "Explore services", href: "/services" },
+    promises: ["Reply within one working day", "Clear prices, written scope", "You own everything once paid", "30 days of support after launch"],
   },
-  logosLabel: "Trusted by brands that refuse to blend in",
-  /** Sample client names — replace with real client logos (SVG) before launch. */
-  logos: ["Northwind", "Kestrel & Co", "Bloomfield", "Arcadia Foods", "Meridian", "Saltline", "Vantage Labs", "Copperleaf", "Halcyon", "Brightwater"],
+  toolsLabel: "We build with tools you already trust",
+  tools: ["Shopify", "WordPress", "WooCommerce", "Next.js", "React Native", "Flutter", "OpenAI", "Claude", "WhatsApp Business", "n8n", "HubSpot", "Meta Ads", "Google Business Profile", "Canva", "Figma"],
   manifesto:
-    "Most agencies sell you a website. We build you a growth engine — design that stops the scroll, search visibility that brings customers to you, and campaigns tracked down to the last rupee and dollar.",
+    "Most businesses juggle a web designer, a marketer, a developer and a nephew who “does the Facebook page”. We're one team for all of it — so your website, your store, your automations and your ads finally work together.",
   services: {
-    heading: "Everything you need to grow online. Under one roof.",
-    subhead: "Pick one service or let us run the whole engine.",
+    heading: "Five service lines. One team behind all of them.",
+    subhead: "Buy one service, or combine them. A store can start with setup, then add management, Meta ads and social media.",
   },
-  results: {
-    heading: "Results, not reports.",
-    /** Sample values — replace with real averages from your client work. */
+  markets: {
+    heading: "Two kinds of clients. One honest team.",
+    local: {
+      label: "For businesses in Pakistan",
+      headline: "We get you more customers.",
+      body: "You already have customers — on WhatsApp, Facebook or walking through the door. We help more of them find you on Google and Maps, and give you a proper store and website to sell from.",
+      points: ["Online stores, Local SEO, Google Business Profile, Meta ads and social media", "Monthly retainers with exactly what's included written down", "WhatsApp-first communication and quick calls"],
+      cta: { label: "Get a free local audit", href: "/contact?service=local-seo" },
+    },
+    international: {
+      label: "For companies abroad",
+      headline: "We build and automate your systems.",
+      body: "You need a dependable team that ships on time and communicates clearly. We build AI chatbots, automations, custom software, mobile apps and Shopify or WordPress work — at a fair rate.",
+      points: ["Fixed-price projects or hourly, billed in USD", "50% upfront, balance on delivery", "Weekly demo links and progress updates"],
+      cta: { label: "Discuss a project", href: "/contact?service=ai-chatbots" },
+    },
+  },
+  offers: {
+    heading: "Where most clients start.",
+    subhead: "Four flagship offers, each available in three tiers. Prices are quoted after a free discovery call, so you only pay for what you need.",
+  },
+  standards: {
+    heading: "Our promises, in numbers.",
     items: [
-      { value: 180, suffix: "%", label: "average increase in organic traffic within 6 months" },
-      { value: 4.2, suffix: "x", label: "average return on ad spend across PPC clients", decimals: 1 },
-      { value: 120, suffix: "+", label: "websites launched" },
-      { value: 92, suffix: "%", label: "client retention rate" },
+      { value: "1", unit: "day", label: "Maximum time to reply to a client message, on working days" },
+      { value: "30", unit: "days", label: "Of support after every launch, then an optional maintenance plan" },
+      { value: "20+", unit: "tests", label: "Realistic questions every chatbot passes before it goes live" },
+      { value: "100", unit: "%", label: "Ownership of the final work once it's paid in full" },
     ],
   },
-  work: {
-    heading: "Work that moved the numbers.",
-    subhead: "A few projects we're proud of. Ask us for the full case studies.",
-    /** Sample projects — replace with real case studies. */
+  lab: {
+    heading: "Fresh out of the lab.",
+    subhead:
+      "We're a new studio, so we'd rather show than tell. These sample projects show how we work — and our first three clients get a founding discount in return for a case study.",
     items: [
-      { client: "Saltline Clinics", industry: "Healthcare", services: ["Website", "Local SEO"], result: "+212% leads in 90 days", hue: 262 },
-      { client: "Arcadia Foods", industry: "Food & beverage", services: ["Branding", "Social"], result: "3x Instagram reach in 4 months", hue: 330 },
-      { client: "Vantage Labs", industry: "B2B SaaS", services: ["SEO", "Content"], result: "Page one for 48 target keywords", hue: 188 },
-      { client: "Copperleaf Home", industry: "E-commerce", services: ["Store", "Email", "Google Ads"], result: "4.6x return on ad spend", hue: 30 },
+      { title: "Demo AI chatbot", kind: "AI", body: "A website and WhatsApp bot that answers FAQs, captures leads and hands over to a human.", status: "Building now", hue: "#A66BFF" },
+      { title: "Sample Shopify store", kind: "E-commerce", body: "A complete store with products, local payments, courier setup and a tested checkout.", status: "Building now", hue: "#FFD23F" },
+      { title: "Local SEO audit", kind: "Growth", body: "A real audit for a nearby business: Google profile, Maps ranking, competitors and quick wins.", status: "Building now", hue: "#FF7AC8" },
     ],
+    founding: {
+      title: "Become a founding client",
+      body: "We're taking on our first three clients at a founding discount. In return, we ask for an honest testimonial and permission to share the work as a case study.",
+      cta: { label: "Claim a founding spot", href: "/contact" },
+    },
   },
   process: {
-    heading: "How we work. Four steps, zero guesswork.",
+    heading: "Five stages. Your approval at every step.",
     steps: [
-      { title: "Discover", body: "We learn your business, customers and competitors, then audit what you have today.", time: "Week 1" },
-      { title: "Strategize", body: "A clear plan with goals, channels, budget and the numbers we'll be judged on.", time: "Week 2" },
-      { title: "Build & launch", body: "Design, development and campaigns go live, tested on every device.", time: "Weeks 3–8" },
-      { title: "Grow", body: "Monthly reporting, testing and optimisation so results keep compounding.", time: "Ongoing" },
+      { title: "Plan", body: "We confirm scope, milestones and dates, and collect your content and access.", time: "Stage 1" },
+      { title: "Design", body: "You approve a mock-up, flow or content plan before we build anything.", time: "Stage 2" },
+      { title: "Build", body: "We develop, set up or write in small steps, with a progress update at least once a week.", time: "Stage 3" },
+      { title: "Review", body: "Our internal quality check first, then your review and revisions within the agreed rounds.", time: "Stage 4" },
+      { title: "Launch & handover", body: "We go live, hand over logins and files, give a short training and start the support period.", time: "Stage 5" },
     ],
   },
-  why: {
-    heading: `Why brands stay with ${site.name}.`,
+  values: {
+    heading: "How we work.",
     items: [
-      { title: "No templates.", body: "Every site and campaign is built for your business, not copied from the last one." },
-      { title: "One team, every channel.", body: "Design, SEO, ads and content talk to each other, so nothing works in a silo." },
-      { title: "Transparent reporting.", body: "A live dashboard and a monthly call. You always know where the money went." },
-      { title: "Speed matters.", body: "Sites built to score 90+ on Google PageSpeed and load in under 2 seconds." },
-      { title: "No lock-in contracts.", body: "We keep clients with results, not paperwork." },
-      { title: "You own everything.", body: "Domains, accounts, code and designs are yours from day one." },
+      { title: "Grow it", body: "Every project is measured by what it does for your business, not by hours spent." },
+      { title: "Keep it simple", body: "Clear plans, plain language, no jargon." },
+      { title: "Ship fast, ship well", body: "Small, frequent deliveries with quality checks before handover." },
+      { title: "Play on purpose", body: "The pixel-and-eggplant brand is fun. The work behind it is serious." },
+      { title: "Be honest", body: "Realistic timelines, clear prices and early warnings when something slips." },
     ],
-  },
-  testimonials: {
-    heading: "Don't take our word for it.",
-    /** Sample testimonials — replace with real, attributable client quotes before launch. */
-    items: [
-      { quote: "Our leads tripled within three months of the new site and SEO going live. The team explains everything in plain English.", who: "Owner", org: "Home services company" },
-      { quote: "They took our ad spend from break-even to 4x return. Best decision we made this year.", who: "Marketing lead", org: "E-commerce brand" },
-      { quote: "The new brand finally looks like the business we are. Customers comment on it constantly.", who: "Founder", org: "Café chain" },
-    ],
+    eggplant: {
+      title: "Why an eggplant?",
+      body: "“Bengan” means eggplant. Ideas are seeds: we plant them, tend them and help them grow into something your customers can actually use.",
+    },
   },
   faq: {
     heading: "Questions we hear every week.",
     items: [
-      { q: "How much does a website cost?", a: "Most business websites fall between $1,500 and $8,000 depending on pages, features and content. You get a fixed quote after a free discovery call." },
-      { q: "How long until I see SEO results?", a: "Usually 3–6 months for meaningful movement, depending on competition and your site's starting point. We share progress monthly." },
-      { q: "Do I need a long contract?", a: "No. Projects are fixed-scope; monthly services run month-to-month after an initial 3-month period." },
-      { q: `Do you work with businesses outside ${site.city}?`, a: "Yes. We work with clients across Pakistan and internationally, fully remote." },
-      { q: "What do I need to get started?", a: "A 30-minute call. We handle the rest." },
+      { q: "How much does a project cost?", a: "It depends on the service and tier. After a free 20–30 minute discovery call, you get a one-to-two page proposal with scope, timeline, price and payment terms within two working days." },
+      { q: "How do payments work?", a: "Projects start with a 50% deposit and the balance on delivery. Monthly retainers are paid at the start of each month. International clients pay in USD." },
+      { q: "How many revisions do I get?", a: "The number of revision rounds is written into every proposal. Extra rounds are quoted separately, so there are no surprises." },
+      { q: "Who owns the work?", a: "You do. Once paid in full, the final deliverables, code, designs and accounts are yours." },
+      { q: "What about hosting, domains, ad spend and plugin fees?", a: "Third-party costs are paid by you directly, or billed at cost — we never mark them up." },
+      { q: "Do you work with clients outside Pakistan?", a: "Yes. We work remotely with international clients on AI, development and e-commerce projects, with weekly updates and demo links." },
+      { q: "Can you show previous work?", a: "We're a new studio, so our portfolio is growing. You can see our sample projects, and our first three clients get a founding discount in return for a case study." },
     ],
   },
   finalCta: {
-    headline: "Got a project in mind? Let's make it impossible to ignore.",
-    subhead: "Tell us where you want to be in 12 months. We'll show you how to get there — free.",
-    primary: { label: "Start a project", href: "/contact" },
-    secondary: { label: "Book a free 30-minute call", href: site.contact.calendarUrl },
+    headline: "Got an idea? Let's plant it.",
+    subhead: "Tell us what you want to build or grow. We'll reply within one working day with next steps — no jargon, no pressure.",
+    primary: { label: "Plant your idea", href: "/contact" },
+    secondary: { label: "Message us on WhatsApp", href: site.contact.whatsappHref },
   },
 };

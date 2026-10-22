@@ -22,11 +22,11 @@ export function Accordion({ items }: { items: FaqItem[] }) {
                 aria-expanded={isOpen}
                 aria-controls={id}
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-6 py-6 text-left font-display text-xl tracking-[-0.02em] md:text-2xl"
+                className="flex w-full items-center justify-between gap-6 py-6 text-left font-display text-xl font-semibold tracking-[-0.015em] md:text-2xl"
               >
                 <span>{it.q}</span>
                 <span
-                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line transition-transform duration-500 ease-out-expo"
+                  className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border-2 border-line transition-transform duration-500 ease-out-expo"
                   style={{ transform: isOpen ? "rotate(45deg)" : "none" }}
                 >
                   <Plus className="h-4 w-4" />

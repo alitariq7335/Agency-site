@@ -1,20 +1,35 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { site } from "@/content/site";
 
 export const alt = `${site.name} — ${site.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OG() {
+export default async function OG() {
+  const [mascot, pixelFont] = await Promise.all([
+    readFile(path.join(process.cwd(), "public/brand/mascot.png")),
+    readFile(path.join(process.cwd(), "src/fonts/press-start-2p.woff")),
+  ]);
+  const mascotSrc = `data:image/png;base64,${mascot.toString("base64")}`;
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 72, background: "#0a0814", color: "#eeeaf7", position: "relative" }}>
-        <div style={{ position: "absolute", right: -120, top: -80, width: 640, height: 640, borderRadius: 9999, background: "radial-gradient(circle at 35% 35%, #b9a8ff, #7c5cff 35%, #ff5fa2 60%, #3de3f5 80%, transparent 82%)", opacity: 0.9 }} />
-        <div style={{ fontSize: 36, display: "flex" }}>{site.name.toLowerCase()}</div>
-        <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: -4, lineHeight: 0.95, maxWidth: 800, display: "flex" }}>{site.tagline}</div>
-        <div style={{ fontSize: 28, color: "#9a94ae", display: "flex" }}>Web · SEO · Ads · Social · Branding</div>
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", gap: 64, padding: "0 80px", background: "#2A1245", color: "#F6F0FF" }}>
+        <img src={mascotSrc} width={300} height={319} alt="" style={{ imageRendering: "pixelated" }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+          <div style={{ display: "flex", fontFamily: "PressStart", fontSize: 64, textShadow: "6px 6px 0 #6A2C91" }}>BENGAN</div>
+          <div style={{ display: "flex", fontFamily: "PressStart", fontSize: 26, color: "#7BE04F", letterSpacing: 10 }}>STUDIOS</div>
+          <div style={{ display: "flex", flexDirection: "column", fontFamily: "PressStart", fontSize: 24, lineHeight: 1.7, marginTop: 24 }}>
+            <span>PLANT THE IDEA.</span>
+            <span style={{ color: "#FFD23F" }}>WE&apos;LL GROW IT.</span>
+          </div>
+          <div style={{ display: "flex", fontFamily: "PressStart", fontSize: 14, lineHeight: 1.8, color: "#C4B5DD", maxWidth: 640 }}>
+            AI · DEVELOPMENT · E-COMMERCE · GROWTH MARKETING · CONTENT
+          </div>
+        </div>
       </div>
     ),
-    size,
+    { ...size, fonts: [{ name: "PressStart", data: pixelFont, weight: 400, style: "normal" }] },
   );
 }

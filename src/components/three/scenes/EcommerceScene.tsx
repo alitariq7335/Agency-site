@@ -8,11 +8,11 @@ import { HeroRig, Dust, useAccent } from "./common";
 
 /** Floating product boxes over a turning glass pedestal. */
 const BOXES: { p: [number, number, number]; s: [number, number, number]; c: string }[] = [
-  { p: [0, 0.45, 0], s: [0.9, 0.9, 0.9], c: "#7c5cff" },
-  { p: [-0.95, 0.05, 0.3], s: [0.6, 0.75, 0.45], c: "#3de3f5" },
-  { p: [0.9, 0.0, -0.2], s: [0.55, 0.55, 0.55], c: "#ff5fa2" },
-  { p: [0.35, 1.35, 0.4], s: [0.42, 0.42, 0.42], c: "#ffb547" },
-  { p: [-0.5, 1.2, -0.45], s: [0.35, 0.5, 0.35], c: "#eeeaf7" },
+  { p: [0, 0.45, 0], s: [0.9, 0.9, 0.9], c: "#A66BFF" },
+  { p: [-0.95, 0.05, 0.3], s: [0.6, 0.75, 0.45], c: "#7BE04F" },
+  { p: [0.9, 0.0, -0.2], s: [0.55, 0.55, 0.55], c: "#FF7AC8" },
+  { p: [0.35, 1.35, 0.4], s: [0.42, 0.42, 0.42], c: "#FFD23F" },
+  { p: [-0.5, 1.2, -0.45], s: [0.35, 0.5, 0.35], c: "#F6F0FF" },
 ];
 
 export default function EcommerceScene({ accent }: { accent: string }) {
@@ -25,13 +25,13 @@ export default function EcommerceScene({ accent }: { accent: string }) {
   });
   return (
     <>
-      <Dust color="#9ef2ff" />
+      <Dust color="#C9A7FF" />
       <HeroRig>
         <group rotation={[0.3, 0, 0]} position={[0, -0.2, 0]}>
           <group ref={pedestal}>
             <mesh position={[0, -0.75, 0]}>
               <cylinderGeometry args={[1.7, 1.85, 0.3, 64]} />
-              <meshPhysicalMaterial color="#120e22" roughness={0.18} metalness={0.85} clearcoat={1} />
+              <meshPhysicalMaterial color="#1A0A2E" roughness={0.18} metalness={0.85} clearcoat={1} />
             </mesh>
             <mesh ref={ring} position={[0, -0.59, 0]} rotation={[-Math.PI / 2, 0, 0]}>
               <torusGeometry args={[1.6, 0.02, 8, 96]} />

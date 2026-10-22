@@ -1,6 +1,6 @@
-# Agency website
+# Bengan Studios website
 
-A WebGL-driven marketing site for a 10-service digital agency.
+The WebGL-driven marketing site for Bengan Studios — 5 service lines, 17 service pages, a 3D voxel version of the eggplant mascot.
 Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Three.js / React Three Fiber · GSAP (ScrollTrigger, SplitText) · Motion v12 · Lenis.
 
 ## Run it
@@ -12,22 +12,24 @@ npm run dev                  # http://localhost:3000
 npm run build && npm start   # production check
 ```
 
-## Before launch — replace placeholders
+## Before launch — fill in the TODOs
 
 All copy lives in `src/content/` (components only read from there):
 
 | File | What to change |
 | --- | --- |
-| `site.ts` | Brand name (currently the placeholder **Orbitly**), city, email, phone, WhatsApp, address, socials, calendar link, hero stats |
-| `home.ts` | Client names in the logo marquee, results numbers, case studies, testimonials, FAQ price range — **all marked as samples** |
-| `services.ts` | The 10 service pages (copy from the approved content doc) |
-| `contact.ts` | Form options, validation messages |
+| `site.ts` | Phone, WhatsApp, email (once the domain is final), city/address, booking link, social profile links — all marked `TODO` |
+| `services.ts` | The 17 service pages, 5 service lines, flagship offers and package tiers |
+| `home.ts` | Home page copy; the "lab" section lists sample projects — update their status as they're finished, and swap in real case studies and testimonials once you have them |
+| `about.ts` | About page copy, team roles (add names when ready) |
+| `contact.ts` | Form options and budget ranges |
 
-Also swap the placeholder logo in `src/components/layout/Logo.tsx` and `src/app/icon.svg`, and have `/privacy` and `/terms` reviewed.
+Brand assets are in `public/brand/` (logos, mascot, icons) and `src/app/` (`favicon.ico`, `icon.png`, `apple-icon.png`). Have `/privacy` and `/terms` reviewed by a lawyer before launch.
 
 ## How it fits together
 
-- **One persistent WebGL canvas** (`src/components/three/SceneCanvas.tsx`) sits behind every page. Pages pick a scene with `<SetScene id="…" />`; scenes cross-fade on navigation. All 13 scenes are procedural (no 3D model downloads) and lazy-loaded.
+- **The voxel mascot** (`src/components/three/scenes/VoxelMascot.tsx`) is built from the pixel grid of `public/brand/mascot.svg` (`src/components/three/data/mascot.ts`). It grows up from the ground on load, follows the cursor and blinks.
+- **One persistent WebGL canvas** (`src/components/three/SceneCanvas.tsx`) sits behind every page. Pages pick a scene with `<SetScene id="…" />`; scenes cross-fade on navigation. All scenes are procedural (no 3D model downloads) and lazy-loaded.
 - **Scroll storytelling**: on the home page each chapter is wrapped in `<CorePose pose="…">`, which tells the 3D "Core" where to sit. The services chapter pins and rotates the ring of 10 shards to the active service.
 - **Shared motion bus**: `motionState` in `src/lib/store.ts` carries scroll progress, velocity and pointer to the 3D scenes without React re-renders.
 - **Animation split**: GSAP for scroll-linked/pinned work, Motion for UI interactions, `useFrame` inside the canvas.

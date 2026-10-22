@@ -29,10 +29,10 @@ export function HeroRig({ children, scale = 1 }: { children: ReactNode; scale?: 
     const p = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
     const k = 1 - Math.exp(-dt * 4);
     const baseX = mobile ? 0 : viewport.width * 0.25;
-    const baseY = mobile ? viewport.height * 0.18 : 0;
+    const baseY = mobile ? viewport.height * 0.25 : 0;
     g.position.x += (baseX - g.position.x) * k;
     g.position.y += (baseY + p * viewport.height * 0.35 - g.position.y) * k;
-    const s = (mobile ? 0.55 : 0.85) * scale * (1 - p * 0.35);
+    const s = (mobile ? 0.44 : 0.85) * scale * (1 - p * 0.35);
     g.scale.setScalar(g.scale.x + (s - g.scale.x) * k);
     g.rotation.y += (motionState.pointer.x * 0.35 + motionState.drag - g.rotation.y) * k;
     g.rotation.x += (-motionState.pointer.y * 0.2 - g.rotation.x) * k;
@@ -41,7 +41,7 @@ export function HeroRig({ children, scale = 1 }: { children: ReactNode; scale?: 
 }
 
 /** Faint field of stars/dust giving depth behind every scene. */
-export function Dust({ count = 900, radius = 14, color = "#b9a8ff", size = 0.025 }) {
+export function Dust({ count = 900, radius = 14, color = "#C9A7FF", size = 0.025 }) {
   const ref = useRef<THREE.Points>(null);
   const geo = useMemo(() => {
     const rnd = seeded(7);

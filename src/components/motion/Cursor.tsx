@@ -50,15 +50,15 @@ export function Cursor() {
         className="pointer-events-none fixed left-0 top-0 z-[89] flex items-center justify-center"
       >
         <div
-          className="flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-[13px] font-medium transition-[width,height,background-color,border-color] duration-300 ease-out"
+          className="flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-md border text-[13px] font-medium transition-[width,height,background-color,border-color] duration-300 ease-out"
           style={{
             width: label ? 96 : hot ? 56 : 36,
             height: label ? 96 : hot ? 56 : 36,
-            background: label ? "rgb(124 92 255 / 0.9)" : "transparent",
-            borderColor: label ? "transparent" : "rgb(238 234 247 / 0.35)",
+            background: label ? "rgb(123 224 79 / 0.95)" : "transparent",
+            borderColor: label ? "transparent" : "rgb(246 240 255 / 0.4)",
           }}
         >
-          {label && <span className="text-white">{label}</span>}
+          {label && <span className="font-semibold text-ink-2">{label}</span>}
         </div>
       </div>
     </>

@@ -15,14 +15,17 @@ export default async function ThankYouPage({ searchParams }: PageProps<"/contact
       <SetScene id="core" />
       <section className="relative flex min-h-[100svh] items-end pb-20 pt-36">
         <div className="container-x">
-          <h1 className="max-w-[12ch] font-display text-[clamp(3rem,8vw,8.5rem)] font-semibold leading-[0.9] tracking-[-0.045em]">
+          <h1 className="max-w-[12ch] font-display text-[clamp(2.75rem,7vw,7.5rem)] font-bold leading-[0.95] tracking-[-0.04em]">
             {contact.success.title}
           </h1>
           <p className="mt-8 max-w-[44ch] text-lede text-bone/80">{contact.success.body(name)}</p>
           <p className="mt-2 text-haze">Want to skip the wait?</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <MagneticButton href={site.contact.calendarUrl} size="lg" external={site.contact.calendarUrl.startsWith("http")}>Book a call now</MagneticButton>
-            <MagneticButton href={site.contact.whatsappHref} size="lg" variant="ghost" external>Chat on WhatsApp</MagneticButton>
+            {site.contact.calendarUrl.startsWith("http") && (
+              <MagneticButton href={site.contact.calendarUrl} size="lg" external>Book a call now</MagneticButton>
+            )}
+            <MagneticButton href={site.contact.whatsappHref} size="lg" variant={site.contact.calendarUrl.startsWith("http") ? "ghost" : "solid"} external>Chat on WhatsApp</MagneticButton>
+            <MagneticButton href="/services" size="lg" variant="ghost">Explore services</MagneticButton>
           </div>
         </div>
       </section>

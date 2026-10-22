@@ -7,7 +7,7 @@ export function Faq({ heading, items }: { heading: string; items: FaqItem[] }) {
     <section aria-label="Frequently asked questions" className="relative py-24 md:py-36">
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <SplitReveal className="font-display text-title font-semibold lg:sticky lg:top-32">{heading}</SplitReveal>
+          <SplitReveal className="font-display text-title font-bold lg:sticky lg:top-32">{heading}</SplitReveal>
         </div>
         <div className="lg:col-span-7 lg:col-start-6">
           <Accordion items={items} />

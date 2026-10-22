@@ -12,7 +12,7 @@ export default function Template({ children }: { children: ReactNode }) {
     <>
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[70] origin-top bg-gradient-to-b from-violet via-[#2a1a6e] to-ink"
+        className="pointer-events-none fixed inset-0 z-[70] origin-top bg-gradient-to-b from-violet via-[#4A1D6B] to-ink"
         initial={{ scaleY: 1 }}
         animate={{ scaleY: 0 }}
         transition={{ duration: 0.95, ease: [0.76, 0, 0.24, 1] }}

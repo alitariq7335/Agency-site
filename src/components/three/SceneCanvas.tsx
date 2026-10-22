@@ -16,12 +16,13 @@ const scenes: Record<SceneId, React.LazyExoticComponent<ComponentType<SceneProps
   helix: lazy(() => import("./scenes/HelixScene")),
   hello: lazy(() => import("./scenes/HelloScene")),
   web: lazy(() => import("./scenes/WebScene")),
+  phone: lazy(() => import("./scenes/WebScene").then((m) => ({ default: (p: SceneProps) => <m.default {...p} variant="phone" /> }))),
+  automation: lazy(() => import("./scenes/AutomationScene")),
   seo: lazy(() => import("./scenes/SeoScene")),
   local: lazy(() => import("./scenes/LocalScene")),
   ppc: lazy(() => import("./scenes/PpcScene")),
   social: lazy(() => import("./scenes/SocialScene")),
   content: lazy(() => import("./scenes/ContentScene")),
-  branding: lazy(() => import("./scenes/BrandingScene")),
   email: lazy(() => import("./scenes/EmailScene")),
   ecommerce: lazy(() => import("./scenes/EcommerceScene")),
   maintenance: lazy(() => import("./scenes/MaintenanceScene")),
@@ -52,9 +53,9 @@ function Studio() {
   // Procedural studio lighting for physical materials — no HDR download.
   return (
     <Environment resolution={128} frames={1}>
-      <Lightformer form="rect" intensity={3} color="#b9a8ff" position={[0, 4, -6]} scale={[10, 3, 1]} />
-      <Lightformer form="rect" intensity={2} color="#3de3f5" position={[-6, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
-      <Lightformer form="rect" intensity={2} color="#ff5fa2" position={[6, -1, 2]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} />
+      <Lightformer form="rect" intensity={3} color="#C9A7FF" position={[0, 4, -6]} scale={[10, 3, 1]} />
+      <Lightformer form="rect" intensity={1.6} color="#7BE04F" position={[-6, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
+      <Lightformer form="rect" intensity={2} color="#FF7AC8" position={[6, -1, 2]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} />
       <Lightformer form="ring" intensity={1.5} color="#ffffff" position={[0, 0, 6]} scale={3} />
     </Environment>
   );
@@ -107,7 +108,7 @@ export default function SceneCanvas() {
         eventSource={typeof document !== "undefined" ? document.body : undefined}
         eventPrefix="client"
         onCreated={({ gl }) => {
-          gl.setClearColor("#0a0814");
+          gl.setClearColor("#2A1245");
           gl.domElement.addEventListener("webglcontextlost", (e) => {
             e.preventDefault();
             setWebgl(false);
@@ -126,7 +127,8 @@ export default function SceneCanvas() {
           <FrozenClock frozen={reduced} />
           <ambientLight intensity={0.35} />
           <directionalLight position={[4, 6, 5]} intensity={1.4} color="#ffffff" />
-          <pointLight position={[-4, -2, 3]} intensity={18} color="#7c5cff" />
+          <pointLight position={[-4, -2, 3]} intensity={16} color="#A66BFF" />
+          <pointLight position={[4, 3, 4]} intensity={8} color="#FF7AC8" />
           <Suspense fallback={null}>
             <Studio />
             <Scene accent={shown.accent} />
@@ -149,7 +151,7 @@ function StaticBackdrop() {
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div
         className="absolute right-[-10%] top-[10%] h-[70vmin] w-[70vmin] rounded-full opacity-80 blur-3xl"
-        style={{ background: "conic-gradient(from 120deg, #7c5cff, #ff5fa2, #3de3f5, #7c5cff)", animation: "spin 18s linear infinite" }}
+        style={{ background: "conic-gradient(from 120deg, #6A2C91, #A66BFF, #FF7AC8, #6A2C91)", animation: "spin 18s linear infinite" }}
       />
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
     </div>

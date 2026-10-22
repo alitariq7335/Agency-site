@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <h2>What we collect</h2>
         <ul>
           <li>Details you send through our contact or newsletter forms: name, email, phone, company, website, project details and any file you attach.</li>
-          <li>Basic analytics about how the site is used (pages viewed, device type, approximate location), collected through Google Analytics and Vercel Analytics.</li>
+          <li>Basic analytics about how the site is used (pages viewed, device type, approximate location), collected through Google Analytics.</li>
         </ul>
         <h2>How we use it</h2>
         <ul>
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
           <li>To understand which pages are useful and improve the site.</li>
         </ul>
         <h2>Sharing</h2>
-        <p>We don&apos;t sell your data. We use trusted providers to run the site and send email (for example Vercel, Resend and Google), who process data on our behalf.</p>
+        <p>We don&apos;t sell your data. We use trusted providers to run the site and send email (for example our hosting provider, Resend and Google), who process data on our behalf.</p>
         <h2>Your choices</h2>
         <p>You can ask us to access, correct or delete your information at any time by emailing <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.</p>
       </LegalPage>
