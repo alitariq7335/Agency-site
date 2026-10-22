@@ -80,7 +80,7 @@ export default function EmailScene({ accent }: { accent: string }) {
       <HeroRig>
         <group rotation={[0.15, -0.5, 0]}>
           <instancedMesh ref={inst} args={[geo, undefined, N]}>
-            <meshStandardMaterial color="#f3f0ff" emissive={color} emissiveIntensity={0.15} side={THREE.DoubleSide} roughness={0.5} />
+            <meshStandardMaterial color="#F6F0FF" emissive={color} emissiveIntensity={0.15} side={THREE.DoubleSide} roughness={0.5} />
           </instancedMesh>
           <group ref={portal} position={[1.6, 0, 0]} rotation={[0, Math.PI / 2 - 0.85, 0]}>
             <mesh>
@@ -89,7 +89,7 @@ export default function EmailScene({ accent }: { accent: string }) {
             </mesh>
             <mesh>
               <torusGeometry args={[1.12, 0.012, 8, 96]} />
-              <meshBasicMaterial color="#3de3f5" />
+              <meshBasicMaterial color="#7BE04F" />
             </mesh>
             <mesh>
               <circleGeometry args={[0.86, 64]} />

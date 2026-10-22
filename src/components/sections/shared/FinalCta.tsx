@@ -9,7 +9,7 @@ export function FinalCta({ headline, subhead, primary, secondary }: { headline: 
   return (
     <CorePose pose="finale" className="relative py-32 md:py-48">
       <div className="container-x text-center">
-        <SplitReveal className="mx-auto max-w-[14ch] font-display text-[clamp(3rem,8vw,8.5rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
+        <SplitReveal className="mx-auto max-w-[16ch] font-display text-[clamp(2.75rem,7vw,7.5rem)] font-bold leading-[0.95] tracking-[-0.04em]">
           {headline}
         </SplitReveal>
         {subhead && <p className="mx-auto mt-8 max-w-xl text-lede text-bone/75">{subhead}</p>}

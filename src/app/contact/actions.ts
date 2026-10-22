@@ -41,6 +41,7 @@ export async function submitContact(formData: FormData): Promise<ContactResult> 
 
   const raw = {
     services: formData.getAll("services"),
+    region: formData.get("region"),
     budget: formData.get("budget"),
     timeline: formData.get("timeline") || undefined,
     company: formData.get("company") ?? "",

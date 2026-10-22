@@ -8,7 +8,7 @@ export function Manifesto() {
       <div className="container-x">
         <WordScrub
           text={home.manifesto}
-          className="max-w-[22ch] font-display text-[clamp(2rem,5.2vw,5.25rem)] font-medium leading-[1.02] tracking-[-0.035em]"
+          className="max-w-[24ch] font-display text-[clamp(2rem,4.8vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.03em]"
         />
       </div>
     </CorePose>

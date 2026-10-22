@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
 import { nav, site } from "@/content/site";
-import { services, serviceGroups } from "@/content/services";
+import { services, serviceLines, servicesInLine } from "@/content/services";
 import { cn } from "@/lib/utils";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -53,7 +53,7 @@ export function Navbar() {
         <div className="container-x pt-3 md:pt-4">
           <div
             className={cn(
-              "flex items-center justify-between rounded-full py-2 pl-4 pr-2 transition-[background-color,border-color,backdrop-filter] duration-500",
+              "flex items-center justify-between rounded-2xl py-2 pl-4 pr-2 transition-[background-color,border-color,backdrop-filter] duration-500",
               scrolled || mega ? "glass" : "border border-transparent",
             )}
           >
@@ -70,11 +70,11 @@ export function Navbar() {
                     onFocus={() => setMega(isServices)}
                     aria-expanded={isServices ? mega : undefined}
                     className={cn(
-                      "relative rounded-full px-4 py-2 text-[15px] transition-colors",
+                      "relative rounded-lg px-4 py-2 text-[15px] transition-colors",
                       active ? "text-bone" : "text-haze hover:text-bone",
                     )}
                   >
-                    {active && <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-white/[0.07]" transition={{ duration: 0.5, ease }} />}
+                    {active && <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-lg bg-white/[0.08]" transition={{ duration: 0.5, ease }} />}
                     <span className="relative">{item.label}</span>
                   </Link>
                 );
@@ -83,13 +83,13 @@ export function Navbar() {
             <div className="flex items-center gap-2">
               <Link
                 href="/contact"
-                className="hidden items-center gap-1.5 rounded-full bg-bone px-4 py-2 text-[15px] font-medium text-ink transition-colors hover:bg-white sm:inline-flex"
+                className="btn-pixel hidden items-center gap-1.5 rounded-lg px-4 py-2 text-[15px] font-semibold sm:inline-flex"
               >
-                Start a project <ArrowUpRight className="h-4 w-4" />
+                Plant your idea <ArrowUpRight className="h-4 w-4" />
               </Link>
               <button
                 type="button"
-                className="relative grid h-11 w-11 place-items-center rounded-full border border-line lg:hidden"
+                className="relative grid h-11 w-11 place-items-center rounded-lg border-2 border-line lg:hidden"
                 aria-label={menu ? "Close menu" : "Open menu"}
                 aria-expanded={menu}
                 onClick={() => setMenu((m) => !m)}
@@ -108,31 +108,31 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -8, filter: "blur(6px)" }}
                 transition={{ duration: 0.35, ease }}
-                className="glass mt-2 hidden rounded-[28px] p-6 lg:block"
+                className="glass mt-2 hidden rounded-[22px] p-6 lg:block"
               >
-                <div className="grid grid-cols-4 gap-6">
-                  {serviceGroups.map((g) => (
+                <div className="grid grid-cols-5 gap-5">
+                  {serviceLines.map((g) => (
                     <div key={g.id}>
-                      <p className="mb-1 font-display text-lg">{g.title}</p>
-                      <p className="mb-4 text-sm text-haze">{g.line}</p>
-                      <ul className="space-y-1">
-                        {services
-                          .filter((s) => s.group === g.id)
-                          .map((s) => (
+                      <p className="mb-1 flex items-center gap-2 font-display text-lg">
+                        <span className="h-2.5 w-2.5" style={{ background: g.accent }} />
+                        {g.title}
+                      </p>
+                      <p className="mb-4 text-[13px] leading-snug text-haze">{g.line}</p>
+                      <ul className="space-y-0.5">
+                        {servicesInLine(g.id).map((s) => (
                             <li key={s.slug}>
-                              <Link href={`/services/${s.slug}`} className="group flex items-center gap-2 rounded-xl px-2 py-1.5 -mx-2 text-[15px] text-bone/90 hover:bg-white/[0.06]">
-                                <span className="h-1.5 w-1.5 rounded-full" style={{ background: s.accent }} />
-                                {s.name}
+                              <Link href={`/services/${s.slug}`} className="-mx-2 block rounded-lg px-2 py-1.5 text-[15px] text-bone/90 hover:bg-white/[0.07]">
+                                {s.shortName}
                               </Link>
                             </li>
-                          ))}
+                        ))}
                       </ul>
                     </div>
                   ))}
                 </div>
                 <div className="mt-6 flex items-center justify-between border-t border-line pt-4 text-sm text-haze">
-                  <span>Not sure where to start? We&apos;ll audit your site, rankings and ads for free.</span>
-                  <Link href="/services" className="text-bone underline decoration-violet underline-offset-4 hover:decoration-bone">
+                  <span>Not sure where to start? Book a free 20–30 minute discovery call.</span>
+                  <Link href="/services" className="text-bone underline decoration-sprout underline-offset-4 hover:decoration-bone">
                     Explore all services
                   </Link>
                 </div>
@@ -162,7 +162,7 @@ export function Navbar() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.15 + i * 0.06, duration: 0.7, ease }}
                   >
-                    <Link href={item.href} onClick={() => setMenu(false)} className="block border-b border-line py-4 font-display text-5xl tracking-[-0.04em]">
+                    <Link href={item.href} onClick={() => setMenu(false)} className="block border-b border-line py-4 font-display text-5xl tracking-[-0.03em]">
                       {item.label}
                     </Link>
                   </motion.div>
@@ -177,7 +177,8 @@ export function Navbar() {
               </div>
               <div className="mt-auto pt-10 text-sm text-haze">
                 <a href={`mailto:${site.contact.email}`} className="block text-bone">{site.contact.email}</a>
-                <a href={`tel:${site.contact.phoneHref}`} className="block">{site.contact.phone}</a>
+                <a href={site.contact.whatsappHref} className="block">WhatsApp {site.contact.whatsapp}</a>
+                <p className="mt-2 font-pixel text-[10px] text-sprout">{site.handle}</p>
               </div>
             </div>
           </motion.div>

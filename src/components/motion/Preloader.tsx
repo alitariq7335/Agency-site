@@ -3,13 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { useSceneStore } from "@/lib/store";
-import { site } from "@/content/site";
+import { Mascot } from "@/components/layout/Logo";
 
 const KEY = "intro-seen";
+const BLOCKS = 20;
 
 /**
- * 000 → 100 counter tied to real readiness (fonts + first 3D frame), capped at
- * ~2.6s, then the two curtains part. Skipped on repeat visits in a session.
+ * Arcade-style loader: the mascot pops in, a pixel bar fills block by block
+ * (tied to fonts + the first 3D frame, capped at ~2.6s), then the curtains
+ * part. Skipped on repeat visits in a session.
  */
 export function Preloader() {
   const sceneReady = useSceneStore((s) => s.sceneReady);
@@ -22,7 +24,6 @@ export function Preloader() {
   const progress = useRef({ v: 0 });
   const finished = useRef(false);
 
-  // Skip on repeat visits within the session.
   useEffect(() => {
     let seen = false;
     try {
@@ -34,13 +35,8 @@ export function Preloader() {
       setIntroDone(true);
       return;
     }
-    // Climb toward 90% while waiting; readiness pushes to 100.
-    const tw = gsap.to(progress.current, {
-      v: 90,
-      duration: 2,
-      ease: "power2.out",
-      onUpdate: render,
-    });
+    gsap.from("[data-pl-mascot]", { y: 30, scale: 0.6, opacity: 0, duration: 0.7, ease: "back.out(2.2)" });
+    const tw = gsap.to(progress.current, { v: 90, duration: 2, ease: "power2.out", onUpdate: render });
     const cap = window.setTimeout(() => finish(), 2600);
     return () => {
       tw.kill();
@@ -59,7 +55,12 @@ export function Preloader() {
   function render() {
     const v = Math.round(progress.current.v);
     if (num.current) num.current.textContent = String(v).padStart(3, "0");
-    if (bar.current) bar.current.style.transform = `scaleX(${v / 100})`;
+    if (bar.current) {
+      const lit = Math.round((v / 100) * BLOCKS);
+      bar.current.querySelectorAll<HTMLSpanElement>("span").forEach((b, i) => {
+        b.style.opacity = i < lit ? "1" : "0.12";
+      });
+    }
   }
 
   function finish() {
@@ -68,14 +69,13 @@ export function Preloader() {
     try {
       sessionStorage.setItem(KEY, "1");
     } catch {}
-    const tl = gsap.timeline({
-      onComplete: () => setGone(true),
-    });
-    tl.to(progress.current, { v: 100, duration: 0.45, ease: "power3.out", onUpdate: render })
-      .to("[data-pl-fade]", { opacity: 0, y: -20, duration: 0.4, stagger: 0.04, ease: "power2.in" }, "+=0.1")
+    const tl = gsap.timeline({ onComplete: () => setGone(true) });
+    tl.to(progress.current, { v: 100, duration: 0.4, ease: "power3.out", onUpdate: render })
+      .to("[data-pl-mascot]", { y: -16, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 })
+      .to("[data-pl-fade]", { opacity: 0, y: -20, duration: 0.35, stagger: 0.04, ease: "power2.in" }, "+=0.05")
       .add(() => setIntroDone(true), "-=0.1")
-      .to("[data-pl-top]", { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, "<")
-      .to("[data-pl-bottom]", { yPercent: 100, duration: 1.1, ease: "expo.inOut" }, "<");
+      .to("[data-pl-top]", { yPercent: -100, duration: 1, ease: "expo.inOut" }, "<")
+      .to("[data-pl-bottom]", { yPercent: 100, duration: 1, ease: "expo.inOut" }, "<");
   }
 
   if (gone) return null;
@@ -84,20 +84,23 @@ export function Preloader() {
     <div ref={root} className="fixed inset-0 z-[100]" role="status" aria-label="Loading">
       <div data-pl-top className="absolute inset-x-0 top-0 h-1/2 bg-ink" />
       <div data-pl-bottom className="absolute inset-x-0 bottom-0 h-1/2 bg-ink" />
-      <div className="container-x relative flex h-full flex-col justify-between py-8">
-        <div data-pl-fade className="flex items-center justify-between text-sm text-haze">
-          <span className="font-display text-base text-bone">{site.name}</span>
-          <span>Loading something worth the wait</span>
-        </div>
-        <div>
-          <div data-pl-fade className="font-display text-[clamp(5rem,22vw,20rem)] leading-none tracking-[-0.06em] tabular-nums">
-            <span ref={num}>000</span>
-            <span className="iris-text">%</span>
-          </div>
-          <div data-pl-fade className="mt-6 h-px w-full bg-line">
-            <div ref={bar} className="h-px origin-left scale-x-0 bg-gradient-to-r from-violet via-flare to-cyan" />
+      <div className="relative flex h-full flex-col items-center justify-center gap-8 px-6">
+        <div data-pl-fade>
+          <div data-pl-mascot>
+            <Mascot size={96} />
           </div>
         </div>
+        <p data-pl-fade className="font-pixel text-[11px] text-sprout md:text-xs">
+          Planting your idea<span className="caret">_</span>
+        </p>
+        <div data-pl-fade ref={bar} className="flex gap-1 border-2 border-bone/20 p-1.5" aria-hidden>
+          {Array.from({ length: BLOCKS }, (_, i) => (
+            <span key={i} className="block h-4 w-2.5 bg-sprout md:w-3.5" style={{ opacity: 0.12 }} />
+          ))}
+        </div>
+        <p data-pl-fade className="font-pixel text-2xl tabular-nums text-bone md:text-3xl">
+          <span ref={num}>000</span>%
+        </p>
       </div>
     </div>
   );

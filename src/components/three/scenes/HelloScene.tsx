@@ -45,7 +45,7 @@ export default function HelloScene() {
     const pos = new Float32Array(COUNT * 3);
     for (let i = 0; i < COUNT * 3; i++) pos[i] = (rnd() - 0.5) * 12;
     const colors = new Float32Array(COUNT * 3);
-    const palette = [new THREE.Color("#7c5cff"), new THREE.Color("#ff5fa2"), new THREE.Color("#3de3f5"), new THREE.Color("#eeeaf7")];
+    const palette = [new THREE.Color("#A66BFF"), new THREE.Color("#FF7AC8"), new THREE.Color("#7BE04F"), new THREE.Color("#F6F0FF")];
     for (let i = 0; i < COUNT; i++) {
       const c = palette[i % palette.length];
       colors.set([c.r, c.g, c.b], i * 3);
@@ -67,7 +67,8 @@ export default function HelloScene() {
     const arr = geo.attributes.position.array as Float32Array;
     const scale = mobile ? 0.85 : 1;
     const offX = mobile ? 0 : viewport.width * 0.26;
-    const offY = mobile ? viewport.height * 0.3 : viewport.height * 0.12;
+    const lift = (Math.min(1.5, window.scrollY / Math.max(1, window.innerHeight)) * viewport.height) * 0.7;
+    const offY = (mobile ? viewport.height * 0.3 : viewport.height * 0.12) + lift;
     const mx = (motionState.pointer.x * viewport.width) / 2;
     const my = (motionState.pointer.y * viewport.height) / 2;
     const d = Math.min(dt, 0.5);

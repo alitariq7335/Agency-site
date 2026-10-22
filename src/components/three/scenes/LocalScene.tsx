@@ -51,7 +51,7 @@ export default function LocalScene({ accent }: { accent: string }) {
         <group rotation={[0.35, 0, 0.1]} position={[0, -0.35, 0]}>
           <group ref={globe}>
             <points geometry={dots}>
-              <pointsMaterial color="#d9d3ee" size={0.028} sizeAttenuation transparent opacity={0.85} />
+              <pointsMaterial color="#E4D8F7" size={0.028} sizeAttenuation transparent opacity={0.85} />
             </points>
             <mesh>
               <icosahedronGeometry args={[1.56, 3]} />
@@ -59,7 +59,7 @@ export default function LocalScene({ accent }: { accent: string }) {
             </mesh>
             <mesh>
               <sphereGeometry args={[1.5, 48, 48]} />
-              <meshStandardMaterial color="#120f20" roughness={0.6} transparent opacity={0.9} />
+              <meshStandardMaterial color="#1A0A2E" roughness={0.6} transparent opacity={0.9} />
             </mesh>
           </group>
           {/* pin standing on top of the globe */}

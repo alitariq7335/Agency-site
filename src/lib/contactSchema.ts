@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { contact, serviceOptions, budgetOptions, timelineOptions, contactMethodOptions, sourceOptions } from "@/content/contact";
+import { contact, serviceOptions, regionOptions, budgetOptions, timelineOptions, contactMethodOptions, sourceOptions } from "@/content/contact";
 
 const m = contact.messages;
 
@@ -14,6 +14,7 @@ export const FILE_TYPES = [
 /** One schema, used by the form (client) and re-checked in the Server Action. */
 export const contactSchema = z.object({
   services: z.array(z.enum(serviceOptions)).min(1, m.service),
+  region: z.enum(regionOptions, { error: m.required }),
   budget: z.enum(budgetOptions, { error: m.required }),
   timeline: z.enum(timelineOptions).optional(),
   company: z.string().max(120).optional().or(z.literal("")),
@@ -33,7 +34,7 @@ export const contactSchema = z.object({
 export type ContactInput = z.infer<typeof contactSchema>;
 
 export const stepFields: (keyof ContactInput)[][] = [
-  ["services", "budget", "timeline"],
+  ["services", "region", "budget", "timeline"],
   ["company", "website", "message"],
   ["name", "email", "phone", "method", "source", "consent"],
 ];

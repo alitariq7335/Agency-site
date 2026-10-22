@@ -31,7 +31,7 @@ export default function SeoScene({ accent }: { accent: string }) {
     const c = new THREE.Color();
     for (let i = 0; i < N * N; i++) {
       const h = heights[i];
-      c.set("#2a2540").lerp(color, Math.min(1, h * 0.9));
+      c.set("#4A1D6B").lerp(color, Math.min(1, h * 0.9));
       m.setColorAt(i, c);
     }
     if (m.instanceColor) m.instanceColor.needsUpdate = true;
@@ -72,7 +72,7 @@ export default function SeoScene({ accent }: { accent: string }) {
 
   return (
     <>
-      <Dust color="#9ef2ff" />
+      <Dust color="#C9A7FF" />
       <HeroRig scale={0.9}>
         <group rotation={[0.55, 0.6, 0]} position={[0, -0.4, 0]}>
           <instancedMesh ref={inst} args={[undefined, undefined, N * N]}>
@@ -87,7 +87,7 @@ export default function SeoScene({ accent }: { accent: string }) {
             <torusGeometry args={[0.32, 0.015, 8, 48]} />
             <meshBasicMaterial color="#ffffff" />
           </mesh>
-          <gridHelper args={[4, 16, color, "#2a2540"]} position={[0, -1, 0]} />
+          <gridHelper args={[4, 16, color, "#4A1D6B"]} position={[0, -1, 0]} />
         </group>
       </HeroRig>
     </>

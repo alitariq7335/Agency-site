@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Check, ArrowUpRight } from "lucide-react";
+import { Check, ArrowUpRight, ShieldCheck } from "lucide-react";
 import type { Service } from "@/content/types";
-import { getService } from "@/content/services";
+import { getService, getLine } from "@/content/services";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { WordScrub } from "@/components/motion/WordScrub";
 import { Marquee } from "@/components/ui/Marquee";
@@ -21,17 +21,17 @@ export function ServiceIncluded({ s }: { s: Service }) {
   return (
     <section aria-labelledby="included" className="relative py-20 md:py-32">
       <div className="container-x">
-        <SplitReveal id="included" className="font-display text-title font-semibold">What&apos;s included</SplitReveal>
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
+        <SplitReveal id="included" className="font-display text-title font-bold">What&apos;s included</SplitReveal>
+        <ul className="mt-14 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {s.included.map((it) => (
-            <li key={it.title} className="group relative bg-ink/85 p-7 backdrop-blur-sm transition-colors duration-500 hover:bg-ink-2/90 md:p-9">
+            <li key={it.title} className="pixel-card group relative rounded-[18px] p-7 md:p-8">
               <span
-                className="grid h-10 w-10 place-items-center rounded-full transition-transform duration-500 ease-out-expo group-hover:scale-110"
+                className="grid h-10 w-10 place-items-center rounded-lg transition-transform duration-500 ease-out-expo group-hover:scale-110"
                 style={{ background: `${s.accent}26`, color: s.accent }}
               >
                 <Check className="h-5 w-5" />
               </span>
-              <h3 className="mt-8 font-display text-2xl font-semibold tracking-[-0.025em]">{it.title}</h3>
+              <h3 className="mt-8 font-display text-2xl font-bold tracking-[-0.02em]">{it.title}</h3>
               <p className="mt-2 text-haze">{it.body}</p>
             </li>
           ))}
@@ -42,20 +42,28 @@ export function ServiceIncluded({ s }: { s: Service }) {
 }
 
 export function ServiceSteps({ s }: { s: Service }) {
+  const line = getLine(s.line);
   return (
     <section aria-labelledby="steps" className="relative py-20 md:py-32">
       <div className="container-x">
-        <SplitReveal id="steps" className="font-display text-title font-semibold">How it works</SplitReveal>
+        <SplitReveal id="steps" className="font-display text-title font-bold">How it works</SplitReveal>
         <ol className="mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
-          {s.steps.map((st, i) => (
-            <li key={st.title} className="relative border-t border-line pt-6">
-              <span className="absolute -top-px left-0 h-px w-12" style={{ background: s.accent }} />
-              <span className="font-display text-6xl font-semibold tracking-[-0.05em] text-bone/15 tabular-nums">{i + 1}</span>
-              <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.025em]">{st.title}</h3>
+          {line.steps.map((st, i) => (
+            <li key={st.title} className="relative border-t-2 border-line pt-6">
+              <span className="absolute -top-[2px] left-0 h-[2px] w-12" style={{ background: s.accent }} />
+              <span className="font-pixel text-3xl text-bone/20">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-5 font-display text-2xl font-bold tracking-[-0.02em]">{st.title}</h3>
               <p className="mt-2 text-haze">{st.body}</p>
             </li>
           ))}
         </ol>
+        <div className="mt-12 flex flex-col gap-4 rounded-[18px] border-2 border-line bg-ink-2/50 p-6 backdrop-blur-sm md:flex-row md:items-center">
+          <ShieldCheck className="h-8 w-8 shrink-0" style={{ color: s.accent }} />
+          <p className="text-bone/85">
+            <span className="font-semibold text-bone">Before we hand over: </span>
+            {line.qualityCheck} Revisions follow the rounds agreed in your proposal, and we reply to messages within one working day.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -74,7 +82,7 @@ export function ServiceAudience({ s }: { s: Service }) {
         </div>
         <Marquee speed={36}>
           {s.tools.map((t) => (
-            <span key={t} className="mx-2 whitespace-nowrap rounded-full border border-line bg-white/[0.03] px-6 py-3 font-display text-xl tracking-[-0.02em] md:text-2xl">
+            <span key={t} className="mx-2 whitespace-nowrap rounded-xl border-2 border-line bg-ink-2/40 px-6 py-3 font-display text-xl font-semibold tracking-[-0.01em] md:text-2xl">
               {t}
             </span>
           ))}
@@ -96,7 +104,7 @@ export function ServiceRelated({ s }: { s: Service }) {
               <Link
                 href={`/services/${r.slug}`}
                 data-cursor="Explore"
-                className="group relative flex min-h-48 flex-col justify-between overflow-hidden rounded-[24px] border border-line bg-ink-2/70 p-7 transition-colors duration-500 hover:border-bone/25"
+                className="pixel-card group relative flex min-h-48 flex-col justify-between overflow-hidden rounded-[18px] p-7 transition-transform duration-300 hover:-translate-y-1"
               >
                 <span
                   aria-hidden
@@ -104,7 +112,7 @@ export function ServiceRelated({ s }: { s: Service }) {
                   style={{ background: r.accent }}
                 />
                 <span className="relative flex items-start justify-between gap-4">
-                  <span className="font-display text-2xl font-semibold tracking-[-0.025em]">{r.name}</span>
+                  <span className="font-display text-2xl font-bold tracking-[-0.02em]">{r.name}</span>
                   <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform duration-500 ease-out-expo group-hover:-translate-y-1 group-hover:translate-x-1" />
                 </span>
                 <span className="relative text-haze">{r.pitch}</span>

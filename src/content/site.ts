@@ -1,45 +1,66 @@
 /**
- * Global site settings. Every placeholder lives here so one edit updates the whole site.
- * BEFORE LAUNCH: replace the brand name, contact details and stats with real values.
- * Stats with `value: null` are hidden automatically.
+ * Global company settings — one edit here updates the whole site.
+ * Items marked TODO are not in the company documentation yet; replace them before launch.
  */
+/** Accepts "example.com", "https://example.com/" etc. and returns "https://example.com". */
+function normalizeUrl(raw: string | undefined) {
+  const v = (raw ?? "").trim();
+  if (!v) return "https://benganstudios.com";
+  const withProtocol = /^https?:\/\//i.test(v) ? v : `https://${v}`;
+  try {
+    return new URL(withProtocol).origin;
+  } catch {
+    return "https://benganstudios.com";
+  }
+}
+
 export const site = {
-  name: "Orbitly", // placeholder brand name — replace with your agency name
-  legalName: "Orbitly Digital", // placeholder
-  tagline: "We build brands people remember.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
-  city: "Pakistan", // primary market, e.g. "Lahore"
+  name: "Bengan Studios",
+  shortName: "Bengan",
+  legalName: "Bengan Studios",
+  handle: "@BenganStudios",
+  tagline: "Plant the idea. We'll grow it.",
+  description:
+    "Bengan Studios is a full-service digital agency that builds software, automates work with AI, and helps businesses grow online — for business owners in Pakistan and clients worldwide.",
+  url: normalizeUrl(process.env.NEXT_PUBLIC_SITE_URL),
+  city: "Pakistan",
   country: "PK",
   locale: "en",
   contact: {
-    email: "hello@example.com",
-    phone: "+92 300 0000000",
-    phoneHref: "+923000000000",
-    whatsapp: "+92 300 0000000",
-    whatsappHref: "https://wa.me/923000000000",
-    address: "Office address, City, Pakistan",
-    hours: "Mon–Fri, 10:00–19:00 (PKT)",
-    mapUrl: "https://maps.google.com",
-    calendarUrl: "#", // e.g. Calendly link for "Book a call"
+    email: "hello@benganstudios.com", // TODO: confirm once the domain is final
+    phone: "+92 300 0000000", // TODO
+    phoneHref: "+923000000000", // TODO
+    whatsapp: "+92 300 0000000", // TODO
+    whatsappHref: "https://wa.me/923000000000", // TODO
+    address: "Pakistan · working worldwide, remote-first", // TODO: add a city or office address if you have one
+    hours: "Mon–Sat, 10:00–19:00 (PKT)",
+    replyTime: "We reply within one working day.",
+    calendarUrl: "/contact", // TODO: swap for a Calendly / Cal.com link when you have one
   },
+  /** One handle everywhere, as the brand guide says. TODO: confirm each profile exists. */
   social: [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
-    { label: "Facebook", href: "https://facebook.com" },
-    { label: "Behance", href: "https://behance.net" },
+    { label: "Instagram", href: "https://instagram.com/benganstudios" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/benganstudios" },
+    { label: "Facebook", href: "https://facebook.com/benganstudios" },
+    { label: "X", href: "https://x.com/BenganStudios" },
+    { label: "YouTube", href: "https://youtube.com/@BenganStudios" },
   ],
-  /** Sample values for layout — replace with your real numbers or set to null to hide. */
-  stats: {
-    projects: 120 as number | null,
-    clients: 80 as number | null,
-    years: 6 as number | null,
-    rating: 4.9 as number | null,
+  /** Brand palette from the identity guide */
+  colors: {
+    aubergine: "#2A1245",
+    night: "#1A0A2E",
+    purple: "#6A2C91",
+    grape: "#A66BFF",
+    sprout: "#7BE04F",
+    coin: "#FFD23F",
+    blush: "#FF7AC8",
+    pixel: "#F6F0FF",
   },
 } as const;
 
 export const nav = [
   { label: "Services", href: "/services" },
-  { label: "Work", href: "/#work" },
+  { label: "About", href: "/about" },
   { label: "Process", href: "/#process" },
   { label: "Contact", href: "/contact" },
 ] as const;

@@ -6,8 +6,10 @@ import { RoundedBox, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { HeroRig, Dust, seeded, useAccent } from "./common";
 
-/** A wireframe browser window whose layout panels fly in and lock into place. */
-const PANELS: [number, number, number, number, number][] = [
+type Panel = [number, number, number, number, number];
+
+/** A browser window (or phone) whose layout panels fly in and lock into place. */
+const BROWSER: Panel[] = [
   // x, y, w, h, tone (0 = accent, 1 = light, 2 = muted)
   [0, 0.78, 2.9, 0.16, 2],
   [-0.55, 0.28, 1.8, 0.62, 0],
@@ -19,20 +21,35 @@ const PANELS: [number, number, number, number, number][] = [
   [0.95, -0.92, 0.8, 0.14, 0],
 ];
 
-export default function WebScene({ accent }: { accent: string }) {
+const PHONE: Panel[] = [
+  [0, 1.02, 1.0, 0.12, 2],
+  [0, 0.6, 1.0, 0.56, 0],
+  [-0.26, 0.04, 0.48, 0.44, 1],
+  [0.26, 0.04, 0.48, 0.44, 1],
+  [-0.26, -0.46, 0.48, 0.44, 1],
+  [0.26, -0.46, 0.48, 0.44, 2],
+  [0, -0.9, 1.0, 0.1, 2],
+  [0, -1.08, 1.0, 0.16, 0],
+];
+
+export default function WebScene({ accent, variant = "browser" }: { accent: string; variant?: "browser" | "phone" }) {
+  const phone = variant === "phone";
+  const PANELS = phone ? PHONE : BROWSER;
+  const FW = phone ? 1.3 : 3.2;
+  const FH = phone ? 2.6 : 2.3;
   const color = useAccent(accent);
   const refs = useRef<(THREE.Mesh | null)[]>([]);
   const frame = useRef<THREE.LineSegments>(null);
   const starts = useMemo(() => {
     const r = seeded(3);
-    return PANELS.map(() => ({
+    return BROWSER.map(() => ({
       p: new THREE.Vector3((r() - 0.5) * 6, (r() - 0.5) * 4, 2 + r() * 3),
       rot: new THREE.Euler((r() - 0.5) * 2, (r() - 0.5) * 2, (r() - 0.5) * 1.5),
       delay: r() * 0.9,
     }));
   }, []);
-  const edges = useMemo(() => new THREE.EdgesGeometry(new THREE.BoxGeometry(3.2, 2.3, 0.08)), []);
-  const tones = useMemo(() => [color, new THREE.Color("#eeeaf7"), new THREE.Color("#2a2540")], [color]);
+  const edges = useMemo(() => new THREE.EdgesGeometry(new THREE.BoxGeometry(FW, FH, 0.08)), [FW, FH]);
+  const tones = useMemo(() => [color, new THREE.Color("#F6F0FF"), new THREE.Color("#4A1D6B")], [color]);
 
   useFrame((st) => {
     const t = st.clock.elapsedTime;
@@ -57,22 +74,23 @@ export default function WebScene({ accent }: { accent: string }) {
 
   return (
     <>
-      <Dust color="#b9a8ff" />
+      <Dust color="#c9a7ff" />
       <HeroRig>
         <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.4}>
-          <group rotation={[0.08, -0.35, 0]}>
-            <RoundedBox args={[3.2, 2.3, 0.06]} radius={0.06} smoothness={3} position={[0, 0, -0.04]}>
-              <meshPhysicalMaterial color="#141024" roughness={0.25} metalness={0.3} clearcoat={1} transparent opacity={0.85} />
+          <group rotation={[0.08, phone ? -0.45 : -0.35, phone ? 0.08 : 0]} scale={phone ? 1.15 : 1}>
+            <RoundedBox args={[FW, FH, phone ? 0.12 : 0.06]} radius={phone ? 0.14 : 0.06} smoothness={3} position={[0, 0, -0.04]}>
+              <meshPhysicalMaterial color="#1A0A2E" roughness={0.25} metalness={0.3} clearcoat={1} transparent opacity={0.92} />
             </RoundedBox>
             <lineSegments ref={frame} geometry={edges}>
               <lineBasicMaterial color={color} transparent opacity={0.4} />
             </lineSegments>
-            {[-1.42, -1.3, -1.18].map((x, i) => (
-              <mesh key={i} position={[x, 1.03, 0.03]}>
-                <circleGeometry args={[0.035, 16]} />
-                <meshBasicMaterial color={i === 0 ? "#ff5fa2" : i === 1 ? "#ffb547" : "#5cffb0"} />
-              </mesh>
-            ))}
+            {!phone &&
+              [-1.42, -1.3, -1.18].map((x, i) => (
+                <mesh key={i} position={[x, 1.03, 0.03]}>
+                  <circleGeometry args={[0.035, 16]} />
+                  <meshBasicMaterial color={i === 0 ? "#FF7AC8" : i === 1 ? "#FFD23F" : "#7BE04F"} />
+                </mesh>
+              ))}
             {PANELS.map(([, , w, h, tone], i) => (
               <RoundedBox
                 key={i}

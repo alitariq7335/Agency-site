@@ -73,7 +73,7 @@ export default function PpcScene({ accent }: { accent: string }) {
           </mesh>
           <instancedMesh ref={coins} args={[undefined, undefined, COINS]}>
             <cylinderGeometry args={[0.2, 0.2, 0.045, 32]} />
-            <meshStandardMaterial color="#ffc94d" emissive="#ff9d1a" emissiveIntensity={0.45} metalness={0.9} roughness={0.25} />
+            <meshStandardMaterial color="#FFD23F" emissive="#E0A800" emissiveIntensity={0.45} metalness={0.9} roughness={0.25} />
           </instancedMesh>
         </group>
       </HeroRig>

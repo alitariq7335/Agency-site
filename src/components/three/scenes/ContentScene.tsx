@@ -46,7 +46,7 @@ export default function ContentScene({ accent }: { accent: string }) {
 
   return (
     <>
-      <Dust color="#9ef2ff" />
+      <Dust color="#C9A7FF" />
       <HeroRig scale={0.8}>
         <group rotation={[0.25, 0, -0.1]}>
           {ribbons.map((geo, i) => (
@@ -55,7 +55,7 @@ export default function ContentScene({ accent }: { accent: string }) {
                 ref={(m) => {
                   ribbonMats.current[i] = m;
                 }}
-                color={i % 2 ? "#7c5cff" : color}
+                color={i % 2 ? "#A66BFF" : color}
                 transparent
                 opacity={0.5}
               />
@@ -69,7 +69,7 @@ export default function ContentScene({ accent }: { accent: string }) {
               }}
             >
               <RoundedBox args={[0.9, 1.2, 0.015]} radius={0.03} smoothness={2}>
-                <meshPhysicalMaterial color="#eeeaf7" roughness={0.5} transparent opacity={0.9} />
+                <meshPhysicalMaterial color="#F6F0FF" roughness={0.5} transparent opacity={0.9} />
               </RoundedBox>
               <mesh position={[-0.12, 0.42, 0.01]}>
                 <planeGeometry args={[0.55, 0.08]} />
@@ -78,7 +78,7 @@ export default function ContentScene({ accent }: { accent: string }) {
               {ls.map((w, j) => (
                 <mesh key={j} position={[-0.38 + w / 2, 0.22 - j * 0.12, 0.01]}>
                   <planeGeometry args={[w, 0.035]} />
-                  <meshBasicMaterial color="#6b6585" />
+                  <meshBasicMaterial color="#8E7BAF" />
                 </mesh>
               ))}
             </group>

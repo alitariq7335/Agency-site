@@ -58,7 +58,7 @@ export default function MaintenanceScene({ accent }: { accent: string }) {
     g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(W * 3), 3));
     return g;
   }, []);
-  const lineObj = useMemo(() => new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: "#5cffb0" })), [lineGeo]);
+  const lineObj = useMemo(() => new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: "#7BE04F" })), [lineGeo]);
 
   useFrame((st, dt) => {
     const t = st.clock.elapsedTime;
@@ -87,20 +87,16 @@ export default function MaintenanceScene({ accent }: { accent: string }) {
       <HeroRig>
         <group rotation={[0.1, -0.35, 0]}>
           <mesh ref={g1} geometry={big} position={[-0.45, 0.2, -0.3]}>
-            <meshStandardMaterial color="#2a2540" metalness={0.85} roughness={0.25} />
+            <meshStandardMaterial color="#4A1D6B" metalness={0.85} roughness={0.25} />
           </mesh>
           <mesh ref={g2} geometry={small} position={[1.15, 0.85, -0.3]}>
             <meshStandardMaterial color={color} metalness={0.6} roughness={0.3} emissive={color} emissiveIntensity={0.25} />
           </mesh>
           <mesh ref={g3} geometry={small} position={[0.95, -0.85, -0.3]}>
-            <meshStandardMaterial color="#7c5cff" metalness={0.6} roughness={0.3} emissive="#7c5cff" emissiveIntensity={0.25} />
+            <meshStandardMaterial color="#A66BFF" metalness={0.6} roughness={0.3} emissive="#A66BFF" emissiveIntensity={0.25} />
           </mesh>
           <mesh geometry={shield} position={[-0.45, 0.2, 0.15]} scale={1.05}>
-            <meshPhysicalMaterial color="#120f20" roughness={0.15} metalness={0.4} clearcoat={1} emissive={color} emissiveIntensity={0.08} />
-          </mesh>
-          <mesh position={[-0.45, 0.22, 0.25]}>
-            <torusGeometry args={[0.16, 0.035, 8, 32, Math.PI * 1.2]} />
-            <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.5} />
+            <meshPhysicalMaterial color="#1A0A2E" roughness={0.15} metalness={0.4} clearcoat={1} emissive={color} emissiveIntensity={0.08} />
           </mesh>
           <primitive object={lineObj} ref={beat} />
         </group>

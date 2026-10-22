@@ -29,7 +29,7 @@ export default function SocialScene({ accent }: { accent: string }) {
       speed: 0.25 + r() * 0.3,
       phase: r() * Math.PI * 2,
       y: (r() - 0.5) * 2.2,
-      tint: i % 4 === 0 ? "#3de3f5" : i % 4 === 1 ? "#7c5cff" : "#ff5fa2",
+      tint: i % 4 === 0 ? "#7BE04F" : i % 4 === 1 ? "#A66BFF" : "#FF7AC8",
     }));
   }, []);
   const refs = useRef<(THREE.Group | null)[]>([]);
@@ -63,7 +63,7 @@ export default function SocialScene({ accent }: { accent: string }) {
       <HeroRig>
         <group rotation={[0.1, -0.3, 0.05]}>
           <RoundedBox args={[1.25, 2.5, 0.12]} radius={0.16} smoothness={4}>
-            <meshPhysicalMaterial color="#17132a" roughness={0.2} metalness={0.6} clearcoat={1} />
+            <meshPhysicalMaterial color="#1A0A2E" roughness={0.2} metalness={0.6} clearcoat={1} />
           </RoundedBox>
           <RoundedBox args={[1.1, 2.3, 0.02]} radius={0.1} smoothness={3} position={[0, 0, 0.065]}>
             <meshStandardMaterial ref={screen} color={color} emissive={color} emissiveIntensity={0.55} roughness={0.4} />
@@ -86,7 +86,7 @@ export default function SocialScene({ accent }: { accent: string }) {
             >
               {it.kind === "heart" ? (
                 <mesh geometry={heartGeo} scale={0.55} rotation={[0, 0, 0]}>
-                  <meshStandardMaterial color="#ff5fa2" emissive="#ff2f7f" emissiveIntensity={0.6} roughness={0.3} />
+                  <meshStandardMaterial color="#FF7AC8" emissive="#FF7AC8" emissiveIntensity={0.6} roughness={0.3} />
                 </mesh>
               ) : (
                 <group>

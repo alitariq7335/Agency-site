@@ -24,9 +24,9 @@ export default function HelixScene() {
     if (!g) return;
     const scroll = window.scrollY / Math.max(1, window.innerHeight);
     g.rotation.y = t * 0.12 + scroll * 1.4 + motionState.pointer.x * 0.25;
-    g.position.x += ((mobile ? 0 : viewport.width * 0.27) - g.position.x) * k;
+    g.position.x += ((mobile ? 0 : viewport.width * 0.31) - g.position.x) * k;
     g.position.y += ((mobile ? viewport.height * 0.24 : 0.1) + scroll * viewport.height * 0.3 - g.position.y) * k;
-    const s = mobile ? 0.5 : 0.78;
+    const s = mobile ? 0.45 : 0.55;
     g.scale.setScalar(g.scale.x + (s - g.scale.x) * k);
     tiles.current.forEach((tile, i) => {
       if (!tile) return;
@@ -77,7 +77,7 @@ export default function HelixScene() {
         })}
         <mesh>
           <cylinderGeometry args={[0.02, 0.02, 5, 8]} />
-          <meshBasicMaterial color="#7c5cff" transparent opacity={0.4} />
+          <meshBasicMaterial color="#7BE04F" transparent opacity={0.4} />
         </mesh>
       </group>
     </>

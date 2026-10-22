@@ -34,22 +34,21 @@ export function MagneticButton({ href, children, variant = "solid", size = "md",
     y.set(0);
   };
 
-  const base =
-    "group relative inline-flex items-center gap-3 rounded-full font-medium transition-colors duration-300 will-change-transform";
-  const sizes = size === "lg" ? "pl-7 pr-2 py-2 text-lg" : "pl-5 pr-1.5 py-1.5 text-[15px]";
+  const base = "group relative inline-flex items-center gap-3 rounded-xl font-semibold will-change-transform";
+  const sizes = size === "lg" ? "pl-6 pr-2 py-2 text-lg" : "pl-5 pr-1.5 py-1.5 text-[15px]";
   const variants =
     variant === "solid"
-      ? "bg-bone text-ink hover:bg-white"
-      : "border border-line text-bone hover:border-bone/40 bg-white/[0.02] backdrop-blur-md";
+      ? "btn-pixel"
+      : "border-2 border-line text-bone transition-colors duration-300 hover:border-bone/40 bg-ink-2/40 backdrop-blur-md";
 
   const content = (
     <>
       <span className="relative">{children}</span>
       <span
         className={cn(
-          "relative grid place-items-center overflow-hidden rounded-full",
+          "relative grid place-items-center overflow-hidden rounded-lg",
           size === "lg" ? "h-11 w-11" : "h-9 w-9",
-          variant === "solid" ? "bg-ink text-bone" : "bg-bone text-ink",
+          variant === "solid" ? "bg-ink-2 text-sprout" : "bg-bone text-ink-2",
         )}
       >
         <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-out-expo group-hover:translate-x-6 group-hover:-translate-y-6" />
